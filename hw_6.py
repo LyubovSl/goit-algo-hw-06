@@ -35,18 +35,18 @@ class Record:
     def edit_phone(self, old_number, new_number):
         for phone in self.phones:    
             if phone.value == old_number:
+                if not new_number.isdigit() or len(new_number) != 10:
+                    raise ValueError("Phone number must be exactly 10 digits.")
                 phone.value = new_number
                 return new_number
-            else:
-                raise ValueError("Old phone number not found.")
+        raise ValueError("Old phone number not found.")
     
 
     def find_phone(self, phone_number):
         for phone in self.phones:
             if phone.value == phone_number:
                 return phone     
-            else:
-                return None                          
+        return None                          
 
     def __str__(self):
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
